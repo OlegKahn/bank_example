@@ -4,6 +4,7 @@ package com.bank.history.controller;
 import com.bank.history.dto.HistoryDto;
 import com.bank.history.model.History;
 import com.bank.history.service.HistoryService;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,13 +14,12 @@ import java.util.List;
 
 
 @RestController
+@AllArgsConstructor
 public class HistoryController {
 
-    @Autowired
-    ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
-    @Autowired
-    HistoryService service;
+    private final HistoryService service;
 
 
     // get all history like dto

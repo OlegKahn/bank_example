@@ -3,15 +3,17 @@ package com.bank.history.service;
 import com.bank.history.exception.NoSuchHistoryException;
 import com.bank.history.model.History;
 import com.bank.history.repository.HistoryDao;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class HistoryServiceImpl implements HistoryService {
 
-    @Autowired
-    HistoryDao historyDao;
+    private final HistoryDao historyDao;
+
     @Override
     public List<History> getAll() {
         return historyDao.findAll();
