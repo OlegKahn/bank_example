@@ -1,18 +1,24 @@
-package com.bank.history.dto;
+package com.bank.history.entity;
 
 import com.bank.history.validator.CheckHistoryData;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.Builder;
+import org.hibernate.envers.Audited;
+import javax.persistence.Column;
+import javax.persistence.GenerationType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.SequenceGenerator;
 import java.util.Objects;
 
 /**
- * Класс предназначен для хранения данных History,
- * выполняет функцию Dto
+ * Основной класс-сущность хранимый в БД
  */
 @Getter
 @Setter
@@ -20,36 +26,38 @@ import java.util.Objects;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "History Model Information")
-public class HistoryDto {
+@Entity
+@Table(schema = "history", name = "history")
+@Audited
+public class History {
 
-    @CheckHistoryData
-    @Schema(accessMode = Schema.AccessMode.READ_ONLY,
-            description = "History Id", example = "123")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "history_generator", sequenceName = "history_seq", schema = "history", allocationSize = 1)
     private long id;
 
     @CheckHistoryData
-    @Schema(description = "Transfer audit id", example = "123")
+    @Column(name = "transfer_audit_id")
     private long transferAuditId;
 
     @CheckHistoryData
-    @Schema(description = "Profile audit id", example = "123")
+    @Column(name = "profile_audit_id")
     private long profileAuditId;
 
     @CheckHistoryData
-    @Schema(description = "Account audit id", example = "123")
+    @Column(name = "account_audit_id")
     private long accountAuditId;
 
     @CheckHistoryData
-    @Schema(description = "Anti fraud audit id", example = "123")
+    @Column(name = "anti_fraud_audit_id")
     private long antiFraudAuditId;
 
     @CheckHistoryData
-    @Schema(description = "Public bank info audit id", example = "123")
+    @Column(name = "public_bank_info_audit_id")
     private long publicBankInfoAuditId;
 
     @CheckHistoryData
-    @Schema(description = "Authorization audit id", example = "123")
+    @Column(name = "authorization_audit_id")
     private long authorizationAuditId;
 
 
@@ -66,12 +74,12 @@ public class HistoryDto {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        final HistoryDto dto = (HistoryDto) o;
-        return id == dto.id && transferAuditId == dto.transferAuditId &&
-                profileAuditId == dto.profileAuditId && accountAuditId ==
-                dto.accountAuditId && antiFraudAuditId == dto.antiFraudAuditId &&
-                publicBankInfoAuditId == dto.publicBankInfoAuditId &&
-                authorizationAuditId == dto.authorizationAuditId;
+        final History history = (History) o;
+        return id == history.id && transferAuditId == history.transferAuditId &&
+                profileAuditId == history.profileAuditId && accountAuditId ==
+                history.accountAuditId && antiFraudAuditId == history.antiFraudAuditId &&
+                publicBankInfoAuditId == history.publicBankInfoAuditId &&
+                authorizationAuditId == history.authorizationAuditId;
     }
 
     /**

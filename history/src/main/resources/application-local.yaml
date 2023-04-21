@@ -37,3 +37,9 @@ spring:
     drop-first: false
   application:
     name: history-app
+
+#    default uri /v3/api-docs, we can change to:
+#springdoc:
+#  api-docs:
+#    path: /api-docs
+
