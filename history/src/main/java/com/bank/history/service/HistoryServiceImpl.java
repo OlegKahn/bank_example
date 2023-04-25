@@ -61,7 +61,7 @@ public class HistoryServiceImpl implements HistoryService {
     @Override
     public History saveNew(History history) {
 
-        if (history.getId() == 0 && isValueLessThanZero(history)) {
+        if (history.getId() == 0 && isValueGreaterThanZero(history)) {
             return historyDao.save(history);
         } else {
             throw new NoSuchHistoryException("Warning! Incorrect entered values: " +
@@ -82,7 +82,7 @@ public class HistoryServiceImpl implements HistoryService {
                 -> new NoSuchHistoryException("Impossible to update! " +
                 "There isn't exist history with id = " + id));
 
-        if (isValueLessThanZero(history)) {
+        if (isValueGreaterThanZero(history)) {
             return historyDao.save(history);
         } else {
             throw new NoSuchHistoryException("Warning! One of values is less than 0: " +
@@ -135,6 +135,12 @@ public class HistoryServiceImpl implements HistoryService {
         return hashMap;
     }
 
+    /**
+     * Метод, который возвращает текст с описанием ошибки
+     * @param history аргумент в котором выявлено,
+     *                что одно или несколько полей имеют нулевое значение
+     * @return возвращает текст
+     */
     private String incorrectData(History history) {
         return "TransferAuditId must be > 0, but transferAuditId = " +
                 history.getTransferAuditId() +
@@ -150,7 +156,14 @@ public class HistoryServiceImpl implements HistoryService {
                 history.getAuthorizationAuditId();
     }
 
-    private boolean isValueLessThanZero(History history) {
+    /**
+     * Метод, который возвращает булевское значение,
+     * true - когда ни одно из полей не меньше нуля,
+     * false - когда хотя бы одно поле меньше нуля
+     * @param history объект в котором проверяют неравенство
+     * @return булевское значение
+     */
+    private boolean isValueGreaterThanZero(History history) {
         return history.getTransferAuditId() > 0 &&
                 history.getProfileAuditId() > 0 &&
                 history.getAccountAuditId() > 0 &&
