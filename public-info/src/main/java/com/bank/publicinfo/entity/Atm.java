@@ -26,7 +26,6 @@ import java.time.LocalTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Audited
 @Entity
 @Table(name = "atm", schema = "public_bank_information")
 public class Atm {
