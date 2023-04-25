@@ -27,7 +27,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Audited
 @Entity
 @Table(name = "branch", schema = "public_bank_information")
 public class Branch {
