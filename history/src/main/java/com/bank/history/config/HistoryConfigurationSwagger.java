@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
  * version - текущая версия артефакта
  * description - краткое описание артефакта
  * *
- * Абсолютный путь к Swagger: <a href="http://localhost:8088/api/history/swagger-ui/index.html">...</a>
+ * Абсолютный путь к Swagger: <a href="http://localhost:8088/api/history/swagger-ui/index.html">.Swagger.</a>
  * Абсолютный путь для Swagger: /api/history/v3/api-docs
  */
 @OpenAPIDefinition
@@ -22,6 +22,6 @@ public class HistoryConfigurationSwagger {
     @Bean
     public OpenAPI baseOpenApi() {
         return new OpenAPI().info(new Info().title("History swagger")
-                .version("0.1.3").description("Open Api for History"));
+                .version("0.1.5").description("Open Api for History"));
     }
 }

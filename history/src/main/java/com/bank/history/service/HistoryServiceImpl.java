@@ -60,12 +60,9 @@ public class HistoryServiceImpl implements HistoryService {
      */
     @Override
     public History saveNew(History history) {
-        if (history.getId() == 0 && history.getTransferAuditId() > 0 && history.getProfileAuditId() > 0 &&
-                history.getAccountAuditId() > 0 && history.getAntiFraudAuditId() > 0 &&
-                history.getPublicBankInfoAuditId() > 0 && history.getAuthorizationAuditId() > 0) {
 
+        if (history.getId() == 0 && isValueLessThanZero(history)) {
             return historyDao.save(history);
-
         } else {
             throw new NoSuchHistoryException("Warning! Incorrect entered values: " +
                     "Id must be 0 or empty, but id = " + history.getId() + ", " +
@@ -84,9 +81,8 @@ public class HistoryServiceImpl implements HistoryService {
         historyDao.findById(id).orElseThrow(()
                 -> new NoSuchHistoryException("Impossible to update! " +
                 "There isn't exist history with id = " + id));
-        if (history.getTransferAuditId() > 0 && history.getProfileAuditId() > 0 &&
-                history.getAccountAuditId() > 0 && history.getAntiFraudAuditId() > 0 &&
-                history.getPublicBankInfoAuditId() > 0 && history.getAuthorizationAuditId() > 0) {
+
+        if (isValueLessThanZero(history)) {
             return historyDao.save(history);
         } else {
             throw new NoSuchHistoryException("Warning! One of values is less than 0: " +
@@ -152,5 +148,14 @@ public class HistoryServiceImpl implements HistoryService {
                 history.getPublicBankInfoAuditId() +
                 ", AuthorizationAuditId must be > 0, but authorizationAuditId = " +
                 history.getAuthorizationAuditId();
+    }
+
+    private boolean isValueLessThanZero(History history) {
+        return history.getTransferAuditId() > 0 &&
+                history.getProfileAuditId() > 0 &&
+                history.getAccountAuditId() > 0 &&
+                history.getAntiFraudAuditId() > 0 &&
+                history.getAuthorizationAuditId() > 0 &&
+                history.getPublicBankInfoAuditId() > 0;
     }
 }
