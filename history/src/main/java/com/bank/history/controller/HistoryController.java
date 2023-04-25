@@ -115,7 +115,7 @@ public class HistoryController {
     // save new history
     @Operation(summary = "This is to add the Histories in the database")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200",
+            @ApiResponse(responseCode = "201",
                     description = " History details saved in database",
                     content = {@Content(mediaType = "application/json")}),
             @ApiResponse(responseCode = "404",
