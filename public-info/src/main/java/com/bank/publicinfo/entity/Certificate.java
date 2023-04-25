@@ -8,6 +8,7 @@ import org.hibernate.envers.AuditJoinTable;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  *  Класс c именем Certificate, представляющим сущность сертификата банка.
@@ -28,6 +29,7 @@ public class Certificate {
     @Column(name = "id")
     private Long id;
 
+    @NotNull
     @Column(name = "photo")
     byte[] photo;
 

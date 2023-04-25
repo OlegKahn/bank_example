@@ -8,7 +8,6 @@ import org.hibernate.envers.AuditReaderFactory;
 import org.hibernate.envers.RevisionListener;
 import org.hibernate.envers.RevisionType;
 import org.hibernate.envers.query.AuditQuery;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -17,7 +16,6 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-@Service
 public class AuditListener implements RevisionListener {
 
     @Override

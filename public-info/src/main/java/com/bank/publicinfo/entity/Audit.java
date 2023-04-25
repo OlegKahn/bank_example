@@ -8,6 +8,8 @@ import org.hibernate.annotations.Cascade;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 
 /**
@@ -36,31 +38,45 @@ public class Audit {
     @Column(name = "id")
     private Long id;
 
+    @NotNull
+    @NotBlank
     @Column(name = "entity_type")
     private String entityType;
 
+    @NotNull
+    @NotBlank
     @Column(name = "operation_type")
     private String operationType;
 
+    @NotNull
+    @NotBlank
     @Column(name = "created_by")
     private String createdBy;
 
+    @NotNull
+    @NotBlank
     @Column(name = "modified_by")
     private String modifiedBy;
 
+    @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm", iso = DateTimeFormat.ISO.DATE_TIME)
     @JsonFormat(pattern = "YYYY-MM-dd HH:mm")
     @Column(name = "created_at")
     private ZonedDateTime createdAt;
 
+    @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm", iso = DateTimeFormat.ISO.DATE_TIME)
     @JsonFormat(pattern = "YYYY-MM-dd HH:mm")
     @Column(name = "modified_at")
     private ZonedDateTime modifiedAt;
 
+    @NotNull
+    @NotBlank
     @Column(name = "new_entity_json")
     private String newEntityJson;
 
+    @NotNull
+    @NotBlank
     @Column(name = "entity_json")
     private String entityJson;
 

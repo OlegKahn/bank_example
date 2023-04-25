@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
 
@@ -18,6 +19,7 @@ import java.time.LocalTime;
 @Schema(description = "Информация о банкомате")
 public class AtmDTO {
 
+    @NotBlank
     @NotNull
     @Schema(description = "Адрес банкомата")
     private String address;

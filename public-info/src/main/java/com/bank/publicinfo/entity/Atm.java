@@ -8,6 +8,8 @@ import org.hibernate.envers.Audited;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
 
 /**
@@ -33,19 +35,24 @@ public class Atm {
     @Column(name = "id")
     private Long id;
 
+    @NotNull
+    @NotBlank
     @Column(name = "address")
     private String address;
 
+    @NotNull
     @DateTimeFormat(pattern = "HH:mm:ss", iso = DateTimeFormat.ISO.DATE_TIME)
     @JsonFormat(pattern = "HH:mm:ss")
     @Column(name = "start_of_work")
     private LocalTime startOfWork;
 
+    @NotNull
     @DateTimeFormat(pattern = "HH:mm:ss", iso = DateTimeFormat.ISO.DATE_TIME)
     @JsonFormat(pattern = "HH:mm:ss")
     @Column(name = "end_of_work")
     private LocalTime endOfWork;
 
+    @NotNull
     @Column(name = "all_hours")
     private Boolean allHours;
 

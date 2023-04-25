@@ -15,7 +15,6 @@ import java.util.Optional;
 @Service
 @Slf4j
 @AllArgsConstructor
-//@Transactional
 public class AtmServiceImpl implements AtmService {
 
     private final AtmRepository atmRepository;

@@ -5,14 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.envers.AuditJoinTable;
-import org.hibernate.envers.AuditMappedBy;
 import org.hibernate.envers.Audited;
-import org.hibernate.envers.NotAudited;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,18 +36,25 @@ public class Branch {
     @Column(name = "id")
     private Long id;
 
+    @NotNull
+    @NotBlank
     @Column(name = "address")
     private String address;
 
+    @NotNull
     @Column(name = "phone_number", unique = true)
     private Long phoneNumber;
 
+    @NotNull
+    @NotBlank
     @Column(name = "city")
     private String city;
 
+    @NotNull
     @Column(name = "start_of_work")
     private LocalTime startOfWork;
 
+    @NotNull
     @Column(name = "end_of_work")
     private LocalTime endOfWork;
 

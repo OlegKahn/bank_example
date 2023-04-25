@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -30,15 +31,19 @@ public class AuditDTO {
     @Schema(description = "id")
     private Long id;
     @NotNull
+    @NotBlank
     @Schema(description = "тип сущности")
     private String entityType;
     @NotNull
+    @NotBlank
     @Schema(description = "тип операции")
     private String operationType;
     @NotNull
+    @NotBlank
     @Schema(description = "кто создал")
     private String createdBy;
     @NotNull
+    @NotBlank
     @Schema(description = "кто изменил")
     private String modifiedBy;
     @NotNull
@@ -48,9 +53,11 @@ public class AuditDTO {
     @Schema(description = "когда изменен")
     private LocalDateTime modifiedAt;
     @NotNull
+    @NotBlank
     @Schema(description = "json, заполняется при создании")
     private String newEntityJson;
     @NotNull
+    @NotBlank
     @Schema(description = "json, заполняется при изменение и при сохранении")
     private String entityJson;
 }

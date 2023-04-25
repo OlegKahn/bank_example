@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -29,12 +30,15 @@ public class BankDetailsDTO {
     @Schema(description = "Кор.счет банкомата")
     private Integer corAccount;
     @NotNull
+    @NotBlank
     @Schema(description = "Город, в котором зарегистрирован юр. адрес банка")
     private String city;
     @NotNull
+    @NotBlank
     @Schema(description = "Акционерное общество")
     private String jointStockCompany;
     @NotNull
+    @NotBlank
     @Schema(description = "Название банка")
     private String name;
 

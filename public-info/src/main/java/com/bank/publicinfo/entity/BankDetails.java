@@ -8,6 +8,8 @@ import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -34,26 +36,36 @@ public class BankDetails {
     @Column(name = "id")
     private Long id;
 
+    @NotNull
     @Column(name = "bik", unique = true)
     private Long bik;
 
+    @NotNull
     @Column(name = "inn", unique = true)
     private Long inn;
 
+    @NotNull
     @Column(name = "kpp", unique = true)
     private Long kpp;
 
+    @NotNull
     @Column(name = "cor_account", unique = true)
     private Integer corAccount;
 
+    @NotNull
+    @NotBlank
     @Max(value = 180)
     @Column(name = "city")
     private String city;
 
+    @NotNull
+    @NotBlank
     @Max(value = 15)
     @Column(name = "joint_stock_company")
     private String jointStockCompany;
 
+    @NotNull
+    @NotBlank
     @Max(value = 80)
     @Column(name = "name")
     private String name;

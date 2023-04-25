@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
 
@@ -21,12 +22,14 @@ public class BranchDTO {
     @Schema(description = "id")
     private Long id;
     @NotNull
+    @NotBlank
     @Schema(description = "Адрес отделения")
     private String address;
     @NotNull
     @Schema(description = "Номер телефона отделения")
     private Long phoneNumber;
     @NotNull
+    @NotBlank
     @Schema(description = "Город в котором находится отделение")
     private String city;
     @NotNull
