@@ -40,10 +40,17 @@ public class HistoryServiceTest {
     }
 
     @Test
-    void getAllFail() {
+    void getAllFailWithNull() {
         doReturn(null).when(historyDao).findAll();
-        List<History> historyServiceAll = historyService.getAll();
-        assertThat(historyServiceAll).isNull();
+        assertThrows(NullPointerException.class,() -> historyService.getAll());
+    }
+
+    @Test
+    void getAllFailWithEmpty() {
+        ArrayList<History> histories = new ArrayList<>();
+        doReturn(histories).when(historyDao).findAll();
+        assertThat(histories).isEmpty();
+        assertThrows(NoSuchHistoryException.class,() -> historyService.getAll());
     }
 
     @RepeatedTest(3)
@@ -63,31 +70,89 @@ public class HistoryServiceTest {
 
     @RepeatedTest(3)
     void saveNewSuccess() {
-        History test = HistoryTest.getHistory(4);
-        doReturn(test).when(historyDao).save(test);
+        History test = HistoryTest.getHistoryWithoutId(4);
+        assertThat(test.getId()).isEqualTo(0);
+        assertThat(test.getAccountAuditId()).isGreaterThan(0);
+        assertThat(test.getPublicBankInfoAuditId()).isGreaterThan(0);
+        assertThat(test.getAntiFraudAuditId()).isGreaterThan(0);
+        assertThat(test.getAuthorizationAuditId()).isGreaterThan(0);
+        assertThat(test.getTransferAuditId()).isGreaterThan(0);
+        assertThat(test.getProfileAuditId()).isGreaterThan(0);
+        History testWithId = HistoryTest.getHistory(4);
+        doReturn(testWithId).when(historyDao).save(test);
         History result = historyService.saveNew(test);
+        assertThat(result).isNotNull();
+        assertThat(result).isEqualTo(testWithId);
+    }
+
+    @Test
+    void saveNewFail() {
+        History test = HistoryTest.getHistory(4);
+        assertThat(test.getId()).isGreaterThan(0);
+        assertThrows(NoSuchHistoryException.class,() -> historyService.saveNew(test));
+    }
+
+    @Test
+    void saveNewFailWithValues() {
+        History test = HistoryTest.getHistory(0);
+        assertThat(test.getAccountAuditId()).isLessThan(1);
+        assertThat(test.getPublicBankInfoAuditId()).isLessThan(1);
+        assertThat(test.getAntiFraudAuditId()).isLessThan(1);
+        assertThat(test.getAuthorizationAuditId()).isLessThan(1);
+        assertThat(test.getTransferAuditId()).isLessThan(1);
+        assertThat(test.getProfileAuditId()).isLessThan(1);
+        assertThrows(NoSuchHistoryException.class,() -> historyService.saveNew(test));
+    }
+
+    @RepeatedTest(3)
+    void saveOldSuccess() {
+        History test = HistoryTest.getHistory(4);
+        Optional<History> optional = Optional.of(test);
+        doReturn(optional).when(historyDao).findById(4L);
+        doReturn(test).when(historyDao).save(test);
+        History result = historyService.saveOld(test);
         assertThat(result).isNotNull();
         assertThat(result).isEqualTo(test);
     }
 
     @RepeatedTest(3)
-    void saveNewFail() {
-        History test = HistoryTest.getHistory(4);
-        doReturn(null).when(historyDao).save(any());
-        History result = historyService.saveNew(test);
-        assertThat(result).isNull();
+    void saveOldFail() {
+        History history = HistoryTest.getHistory(4000);
+        assertThrows(NoSuchHistoryException.class, () -> historyService.saveOld(history));
+    }
+
+    @Test
+    void saveOldFailWithValues() {
+        History test = HistoryTest.getHistory(0);
+        test.setId(1L);
+        Optional<History> optional = Optional.of(test);
+        assertThat(test.getAccountAuditId()).isLessThan(1);
+        assertThat(test.getPublicBankInfoAuditId()).isLessThan(1);
+        assertThat(test.getAntiFraudAuditId()).isLessThan(1);
+        assertThat(test.getAuthorizationAuditId()).isLessThan(1);
+        assertThat(test.getTransferAuditId()).isLessThan(1);
+        assertThat(test.getProfileAuditId()).isLessThan(1);
+
+        doReturn(optional).when(historyDao).findById(1L);
+
+        assertThrows(NoSuchHistoryException.class,() -> historyService.saveOld(test));
     }
 
     @RepeatedTest(3)
     void deleteSuccess() {
+        History history = HistoryTest.getHistory(1);
+        Optional<History> optional = Optional.of(history);
+
+        doReturn(optional).when(historyDao).findById(1L);
+
         historyService.delete(1);
-        verify(historyDao).deleteById(1L);
+
+        verify(historyDao).delete(history);
     }
 
     @RepeatedTest(3)
     void deleteFail() {
-        historyService.delete(anyInt());
-        verify(historyDao, never()).deleteById(1L);
+        assertThrows(NoSuchHistoryException.class, () -> historyService.delete(anyInt()));
     }
 
     @RepeatedTest(3)

@@ -8,16 +8,18 @@ class CheckHistoryDataValidatorTest {
     @Test
     void isValidSuccess() {
         CheckHistoryDataValidator validator = new CheckHistoryDataValidator();
-        boolean isValid = validator.isValid("11111", null);
-
+        String o = "11111";
+        assertThat(o).isNotNull();
+        boolean isValid = validator.isValid(o, null);
         assertThat(isValid).isTrue();
     }
 
     @Test
     void isValidFail() {
         CheckHistoryDataValidator validator = new CheckHistoryDataValidator();
-        boolean isValid = validator.isValid("test", null);
-
+        String test = "test";
+        assertThat(test).isNotNull();
+        boolean isValid = validator.isValid(test, null);
         assertThat(isValid).isFalse();
     }
 }

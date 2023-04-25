@@ -151,7 +151,7 @@ public class HistoryController {
     @PutMapping("/")
     public ResponseEntity<HistoryDto> saveOld(@RequestBody HistoryDto historyDto) {
         final History historyRequest = modelMapper.map(historyDto, History.class);
-        final History history = service.saveNew(historyRequest);
+        final History history = service.saveOld(historyRequest);
         final HistoryDto dto = modelMapper.map(history, HistoryDto.class);
         log.info("update history information id = " + historyDto.getId());
         return ResponseEntity.ok().body(dto);

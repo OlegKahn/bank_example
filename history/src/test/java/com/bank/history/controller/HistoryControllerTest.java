@@ -83,7 +83,7 @@ class HistoryControllerTest {
         History history = HistoryTest.getHistory(111);
 
         doReturn(history).when(modelMapper).map(historyDto, History.class);
-        doReturn(history).when(historyService).saveNew(history);
+        doReturn(history).when(historyService).saveOld(history);
         doReturn(historyDto).when(modelMapper).map(history, HistoryDto.class);
 
         ResponseEntity<HistoryDto> responseEntity = historyController.saveOld(historyDto);

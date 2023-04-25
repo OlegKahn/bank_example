@@ -26,6 +26,11 @@ public interface HistoryService {
     History saveNew(History history);
 
     /**
+     * Не реализованный метод для обновления History
+     */
+    History saveOld(History history);
+
+    /**
      * Не реализованный метод для удаления History по id
      */
     void delete(long id);

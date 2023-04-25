@@ -29,7 +29,12 @@ public class HistoryServiceImpl implements HistoryService {
      */
     @Override
     public List<History> getAll() {
-        return historyDao.findAll();
+        final List<History> allHistory = historyDao.findAll();
+        if (allHistory.isEmpty()) {
+            throw new NoSuchHistoryException("Data base doesn't have any History");
+        } else {
+            return allHistory;
+        }
     }
 
     /**
@@ -44,7 +49,8 @@ public class HistoryServiceImpl implements HistoryService {
     @Override
     public History getById(long id) {
         return historyDao.findById(id).orElseThrow(()
-                -> new NoSuchHistoryException("There is no history with id = " + id));
+                -> new NoSuchHistoryException("Impossible to find one! " +
+                "There is no such history with id = " + id));
     }
 
     /**
@@ -54,7 +60,38 @@ public class HistoryServiceImpl implements HistoryService {
      */
     @Override
     public History saveNew(History history) {
-        return historyDao.save(history);
+        if (history.getId() == 0 && history.getTransferAuditId() > 0 && history.getProfileAuditId() > 0 &&
+                history.getAccountAuditId() > 0 && history.getAntiFraudAuditId() > 0 &&
+                history.getPublicBankInfoAuditId() > 0 && history.getAuthorizationAuditId() > 0) {
+
+            return historyDao.save(history);
+
+        } else {
+            throw new NoSuchHistoryException("Warning! Incorrect entered values: " +
+                    "Id must be 0 or empty, but id = " + history.getId() + ", " +
+                    incorrectData(history));
+        }
+    }
+
+    /**
+     * Метод, который обновляет в БД History
+     * @param history объект History из БД
+     * @return History
+     */
+    @Override
+    public History saveOld(History history) {
+        final long id = history.getId();
+        historyDao.findById(id).orElseThrow(()
+                -> new NoSuchHistoryException("Impossible to update! " +
+                "There isn't exist history with id = " + id));
+        if (history.getTransferAuditId() > 0 && history.getProfileAuditId() > 0 &&
+                history.getAccountAuditId() > 0 && history.getAntiFraudAuditId() > 0 &&
+                history.getPublicBankInfoAuditId() > 0 && history.getAuthorizationAuditId() > 0) {
+            return historyDao.save(history);
+        } else {
+            throw new NoSuchHistoryException("Warning! One of values is less than 0: " +
+            incorrectData(history));
+        }
     }
 
     /**
@@ -63,7 +100,10 @@ public class HistoryServiceImpl implements HistoryService {
      */
     @Override
     public void delete(long id) {
-        historyDao.deleteById(id);
+        final History history = historyDao.findById(id).orElseThrow(()
+                -> new NoSuchHistoryException("Impossible to delete! " +
+                "There is not exist history with id = " + id));
+        historyDao.delete(history);
     }
 
     /**
@@ -75,7 +115,12 @@ public class HistoryServiceImpl implements HistoryService {
     public Map<RevisionMetadata<Long>, History> getAllAuditById(long id) {
         final Map<RevisionMetadata<Long>, History> hashMap = new HashMap<>();
         final Revisions<Long, History> revisions = historyDao.findRevisions(id);
-        revisions.stream().forEach(r -> hashMap.put(r.getMetadata(), r.getEntity()));
+        if (revisions.isEmpty()) {
+            throw new NoSuchHistoryException("Impossible to find all! " +
+                    "There is no such history changes with id = " + id);
+        } else {
+            revisions.stream().forEach(r -> hashMap.put(r.getMetadata(), r.getEntity()));
+        }
         return hashMap;
     }
 
@@ -92,5 +137,20 @@ public class HistoryServiceImpl implements HistoryService {
                         "history with id = " + id));
         hashMap.put(revision.getMetadata(), revision.getEntity());
         return hashMap;
+    }
+
+    private String incorrectData(History history) {
+        return "TransferAuditId must be > 0, but transferAuditId = " +
+                history.getTransferAuditId() +
+                ", ProfileAuditId must be > 0, but profileAuditId = " +
+                history.getProfileAuditId() +
+                ", AccountAuditId must be > 0, but accountAuditId = " +
+                history.getAccountAuditId() +
+                ", AntiFraudAuditId must be > 0, but antiFraudAuditId = " +
+                history.getAntiFraudAuditId() +
+                ", PublicBankInfoAuditId must be > 0, but publicBankInfoAuditId = " +
+                history.getPublicBankInfoAuditId() +
+                ", AuthorizationAuditId must be > 0, but authorizationAuditId = " +
+                history.getAuthorizationAuditId();
     }
 }

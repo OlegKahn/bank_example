@@ -10,7 +10,6 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.history.RevisionMetadata;
 import java.util.Map;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -60,7 +59,7 @@ public class HistoryServiceIT {
         history.setAuthorizationAuditId(300);
         history.setPublicBankInfoAuditId(300);
 
-        History updatedHistory = historyService.saveNew(history);
+        History updatedHistory = historyService.saveOld(history);
 
         assertThat(updatedHistory.getProfileAuditId())
                 .isEqualTo(history.getProfileAuditId());
@@ -97,6 +96,6 @@ public class HistoryServiceIT {
         long id = history.getId();
         historyService.delete(id);
 
-        assertThrows(NoSuchHistoryException.class, ()-> historyService.getById(id));
+        assertThrows(NoSuchHistoryException.class, ()-> historyService.delete(id));
     }
 }

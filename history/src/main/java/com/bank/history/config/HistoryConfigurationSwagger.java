@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
  * version - текущая версия артефакта
  * description - краткое описание артефакта
  * *
+ * Абсолютный путь к Swagger: <a href="http://localhost:8088/api/history/swagger-ui/index.html">...</a>
  * Абсолютный путь для Swagger: /api/history/v3/api-docs
  */
 @OpenAPIDefinition
