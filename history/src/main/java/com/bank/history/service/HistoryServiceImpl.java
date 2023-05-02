@@ -3,6 +3,7 @@ package com.bank.history.service;
 import com.bank.history.exception.NoSuchHistoryException;
 import com.bank.history.entity.History;
 import com.bank.history.repository.HistoryDao;
+import io.micrometer.core.instrument.MeterRegistry;
 import lombok.AllArgsConstructor;
 import org.springframework.data.history.Revision;
 import org.springframework.data.history.RevisionMetadata;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Класс который реализирует интерфейс HistoryService,
@@ -21,6 +23,10 @@ import java.util.Map;
 public class HistoryServiceImpl implements HistoryService {
 
     private final HistoryDao historyDao;
+
+    private final MeterRegistry meterRegistry;
+
+    private final AtomicInteger atomicInteger;
 
 
     /**
@@ -62,6 +68,10 @@ public class HistoryServiceImpl implements HistoryService {
     public History saveNew(History history) {
 
         if (history.getId() == 0 && isValueGreaterThanZero(history)) {
+
+            meterRegistry.gauge("transfer_audit_id", atomicInteger);
+            atomicInteger.set((int) history.getTransferAuditId());
+
             return historyDao.save(history);
         } else {
             throw new NoSuchHistoryException("Warning! Incorrect entered values: " +

@@ -2,6 +2,7 @@ package com.bank.history.controller;
 
 import com.bank.history.dto.HistoryDto;
 import com.bank.history.service.HistoryService;
+import io.micrometer.core.annotation.Timed;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -55,6 +56,7 @@ public class HistoryControllerAudit {
                     description = "Page not found",
                     content = @Content)
     })
+    @Timed("gettingAllAuditById")
     @GetMapping("/all/{id}")
     public Map<RevisionMetadata<Long>, HistoryDto> getAllAuditById(@PathVariable long id) {
         final Map<RevisionMetadata<Long>, HistoryDto> allAuditById
@@ -81,6 +83,7 @@ public class HistoryControllerAudit {
                     description = "Page not found",
                     content = @Content)
     })
+    @Timed("gettingLastAuditById")
     @GetMapping("/last/{id}")
     public Map<RevisionMetadata<Long>, HistoryDto> getLastAuditById(@PathVariable long id) {
         final Map<RevisionMetadata<Long>, HistoryDto> lastAuditById

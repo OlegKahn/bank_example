@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>history</artifactId>
-    <version>0.1.5</version>
+    <version>0.1.6</version>
     <name>history</name>
     <description>history</description>
 
@@ -89,6 +89,12 @@
             <artifactId>spring-cloud-starter</artifactId>
             <version>${cloud.starter.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -4,6 +4,7 @@ import com.bank.history.exception.NoSuchHistoryException;
 import com.bank.history.entity.History;
 import com.bank.history.entity.HistoryTest;
 import com.bank.history.repository.HistoryDao;
+import io.micrometer.core.instrument.MeterRegistry;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -14,6 +15,7 @@ import org.springframework.data.history.Revision;
 import org.springframework.data.history.RevisionMetadata;
 import org.springframework.data.history.Revisions;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -24,6 +26,12 @@ public class HistoryServiceTest {
 
     @Mock
     HistoryDao historyDao;
+
+    @Mock
+    MeterRegistry meterRegistry;
+
+    @Mock
+    AtomicInteger atomicInteger; // метод set final, иак что без проверки
 
     @InjectMocks
     HistoryServiceImpl historyService;
@@ -71,6 +79,7 @@ public class HistoryServiceTest {
     @RepeatedTest(3)
     void saveNewSuccess() {
         History test = HistoryTest.getHistoryWithoutId(4);
+
         assertThat(test.getId()).isEqualTo(0);
         assertThat(test.getAccountAuditId()).isGreaterThan(0);
         assertThat(test.getPublicBankInfoAuditId()).isGreaterThan(0);
@@ -78,10 +87,15 @@ public class HistoryServiceTest {
         assertThat(test.getAuthorizationAuditId()).isGreaterThan(0);
         assertThat(test.getTransferAuditId()).isGreaterThan(0);
         assertThat(test.getProfileAuditId()).isGreaterThan(0);
+
         History testWithId = HistoryTest.getHistory(4);
+
         doReturn(testWithId).when(historyDao).save(test);
+
         History result = historyService.saveNew(test);
+
         assertThat(result).isNotNull();
+        verify(meterRegistry).gauge("transfer_audit_id", atomicInteger);
         assertThat(result).isEqualTo(testWithId);
     }
 

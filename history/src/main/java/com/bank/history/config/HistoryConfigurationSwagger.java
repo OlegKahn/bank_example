@@ -22,6 +22,6 @@ public class HistoryConfigurationSwagger {
     @Bean
     public OpenAPI baseOpenApi() {
         return new OpenAPI().info(new Info().title("History swagger")
-                .version("0.1.5").description("Open Api for History"));
+                .version("0.1.6").description("Open Api for History"));
     }
 }

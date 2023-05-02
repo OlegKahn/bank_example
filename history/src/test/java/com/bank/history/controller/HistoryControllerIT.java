@@ -7,6 +7,7 @@ import com.bank.history.entity.HistoryTest;
 import com.bank.history.repository.HistoryDao;
 import com.bank.history.service.HistoryService;
 import com.bank.history.service.HistoryServiceImpl;
+import io.micrometer.core.instrument.MeterRegistry;
 import org.junit.jupiter.api.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.history.RevisionMetadata;
 import org.springframework.http.ResponseEntity;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -34,9 +37,10 @@ public class HistoryControllerIT {
 
 
     @Autowired
-    HistoryControllerIT(ModelMapper modelMapper, HistoryDao historyDao) {
+    HistoryControllerIT(ModelMapper modelMapper, HistoryDao historyDao,
+                        MeterRegistry registry, AtomicInteger atomic) {
         this.modelMapper = modelMapper;
-        HistoryService historyService = new HistoryServiceImpl(historyDao);
+        HistoryService historyService = new HistoryServiceImpl(historyDao, registry, atomic);
         this.historyController = new HistoryController(modelMapper, historyService);
         this.historyControllerAudit = new HistoryControllerAudit(historyService, modelMapper);
     }

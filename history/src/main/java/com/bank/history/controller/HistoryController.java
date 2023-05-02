@@ -3,6 +3,7 @@ package com.bank.history.controller;
 import com.bank.history.dto.HistoryDto;
 import com.bank.history.entity.History;
 import com.bank.history.service.HistoryService;
+import io.micrometer.core.annotation.Timed;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 
@@ -71,6 +71,7 @@ public class HistoryController {
                     description = "Page not found",
                     content = @Content)
     })
+    @Timed("gettingAllHistory")
     @GetMapping("/")
     public List<HistoryDto> getAll() {
         log.info("get all history");
@@ -94,10 +95,10 @@ public class HistoryController {
                     description = " Page Not Found",
                     content = @Content)
     })
+    @Timed("gettingById")
     @GetMapping("/{id}")
     public ResponseEntity<HistoryDto> getById(
             @Parameter(description = "Find history by id", required = true)
-            @RequestParam(defaultValue = "1")
             @PathVariable long id) {
         final History history = service.getById(id);
         final HistoryDto dto = modelMapper.map(history, HistoryDto.class);
@@ -122,6 +123,7 @@ public class HistoryController {
                     description = " Page Not Found",
                     content = @Content)
     })
+    @Timed("savingNewHistory")
     @PostMapping("/")
     public ResponseEntity<HistoryDto> saveNew(@RequestBody HistoryDto historyDto) {
         final History historyRequest = modelMapper.map(historyDto, History.class);
@@ -148,6 +150,7 @@ public class HistoryController {
                     description = " Page Not Found",
                     content = @Content)
     })
+    @Timed("savingOldHistory")
     @PutMapping("/")
     public ResponseEntity<HistoryDto> saveOld(@RequestBody HistoryDto historyDto) {
         final History historyRequest = modelMapper.map(historyDto, History.class);
@@ -174,6 +177,7 @@ public class HistoryController {
                     description = " Page Not Found",
                     content = @Content)
     })
+    @Timed("deletingHistory")
     @DeleteMapping("/{id}")
     public void delete(
             @Parameter(description = "Delete history by id", required = true)

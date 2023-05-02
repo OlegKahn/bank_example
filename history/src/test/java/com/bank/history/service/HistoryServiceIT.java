@@ -4,12 +4,15 @@ import com.bank.history.exception.NoSuchHistoryException;
 import com.bank.history.entity.History;
 import com.bank.history.entity.HistoryTest;
 import com.bank.history.repository.HistoryDao;
+import io.micrometer.core.instrument.MeterRegistry;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.history.RevisionMetadata;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -25,8 +28,8 @@ public class HistoryServiceIT {
 
 
     @Autowired
-    HistoryServiceIT(HistoryDao dao) {
-        historyService = new HistoryServiceImpl(dao);
+    HistoryServiceIT(HistoryDao dao, MeterRegistry registry, AtomicInteger atomic) {
+        historyService = new HistoryServiceImpl(dao, registry, atomic);
     }
 
 

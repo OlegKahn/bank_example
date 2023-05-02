@@ -8,6 +8,18 @@ management:
   endpoint:
     shutdown:
       enabled: true
+#    health:
+#      show-details: always
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    distribution:
+      percentiles-histogram:
+        "[http.server.request]": true
+  #      enabled: true
+#    prometheus:
+#      enabled: true
   endpoints:
     web:
       exposure:
