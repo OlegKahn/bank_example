@@ -55,7 +55,7 @@ public class HistoryDto {
 
     /**
      * Стандартный метод сравнения
-     * @param o объект который сравнивают
+     * @param o объект, который сравнивают
      * @return true если равны, false если нет
      */
     @Override

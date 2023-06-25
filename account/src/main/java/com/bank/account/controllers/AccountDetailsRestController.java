@@ -89,7 +89,7 @@ public class AccountDetailsRestController {
     @PostMapping()
     public ResponseEntity<HttpStatus> create(@RequestBody @Valid AccountDetailsDTO accountDetailsDTO, @Parameter(description = "Данные об ошибках валидации") BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            StringBuilder errorMsg = new StringBuilder();
+            StringBuilder errorMsg = getErrorMsg();
             List<FieldError> errors = bindingResult.getFieldErrors();
             for (FieldError error : errors) {
                 errorMsg.append(error.getField())
@@ -103,6 +103,10 @@ public class AccountDetailsRestController {
         log.info("Добавление аккаунта с номером: {} выполнен успешно.", accountDetailsDTO.getAccountNumber());
 
         return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    public StringBuilder getErrorMsg() {
+        return new StringBuilder();
     }
 
     /**
@@ -120,7 +124,7 @@ public class AccountDetailsRestController {
     @PatchMapping("/{id}")
     public ResponseEntity<HttpStatus> update(@RequestBody @Valid AccountDetailsDTO accountDetailsDTO, @Parameter(description = "Данные об ошибках валидации") BindingResult bindingResult, @PathVariable("id") @Parameter(description = "Идентификатор аккаунта, в котором нужно произвести обновление") int id) {
         if (bindingResult.hasErrors()) {
-            StringBuilder errorMsg = new StringBuilder();
+            StringBuilder errorMsg = getErrorMsg();
             List<FieldError> errors = bindingResult.getFieldErrors();
             for (FieldError error : errors) {
                 errorMsg.append(error.getField())

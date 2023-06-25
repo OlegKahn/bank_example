@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Класс, предназначен для регистрации необходимых бинов,
- * для Prometheus и Grafana
+ * для <a href="http://localhost:9090/graph">Prometheus</a> и <a href="http://localhost:3000/">Grafana</a>
  */
 @Configuration
 public class HistoryTimedConfiguration {
