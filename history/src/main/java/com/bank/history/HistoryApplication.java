@@ -8,10 +8,10 @@ import org.springframework.data.envers.repository.support.EnversRevisionReposito
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
- * @author Олег Кан
- * @version 0.1.3
+ * @author Kan Oleg
+ * @version 0.1.6
  *
- * Класс предназначен для запуска приложения и регистрации бинов
+ * The class is designed to run the application and register beans
  */
 @SpringBootApplication
 @EnableJpaRepositories(repositoryFactoryBeanClass = EnversRevisionRepositoryFactoryBean.class,
@@ -19,17 +19,17 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class HistoryApplication {
 
     /**
-     * Стандартный метод выполняющий запуск приложения
+     * Standard method for launching an application
      *
-     * @param args В Java args содержит предоставленные
-     *             аргументы командной строки в виде массива String объектов.
+     * @param args In Java, args contains the provided ones
+     *             Command line arguments, specified as an array of String objects.
      */
     public static void main(String[] args) {
         SpringApplication.run(HistoryApplication.class, args);
     }
 
     /**
-     * @return возвращает бин ModelMapper
+     * @return returns the ModelMapper bean
      */
     @Bean(name = "myEntityMapper")
     public ModelMapper modelMapper() {

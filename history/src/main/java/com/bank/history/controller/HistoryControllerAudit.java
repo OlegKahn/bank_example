@@ -20,12 +20,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * Класс Rest API для получения информации об изменениях
- * Методы:
- * getAllAuditById - получает все изменения определенного History
+ * Rest API class for receiving change information
+ * Methods:
+ * getAllAuditById - gets all changes of a certain History
  * @see HistoryControllerAudit#getAllAuditById(long)
  *
- *  getLastAuditById - получает поледнее изменение в History
+ *  getLastAuditById - gets the latest change in History
  * @see HistoryControllerAudit#getLastAuditById(long)
  *
  */
@@ -41,10 +41,10 @@ public class HistoryControllerAudit {
     private final ModelMapper modelMapper;
 
     /**
-     * Метод для получения всех изменений
-     * определенного History через id
+     * Method to get all changes
+     * specific History via id
      *
-     * @param id History у которого ищем все изменения
+     * @param id History from which we are looking for all changes
      * @return Map<RevisionMetadata<Long>, HistoryDto>
      */
     @Operation(summary = "This is to fetch All the History changes stored in Db")
@@ -68,10 +68,10 @@ public class HistoryControllerAudit {
     }
 
     /**
-     * Метод для получения последнего изменения
-     * определенного History через id
+     * Method to get the last change
+     * specific History via id
      *
-     * @param id History у которого ищем последнее изменение
+     * @param id History from which we are looking for the last change
      * @return Map<RevisionMetadata<Long>, HistoryDto>
      */
     @Operation(summary = "This is to fetch Last the History change stored in Db")

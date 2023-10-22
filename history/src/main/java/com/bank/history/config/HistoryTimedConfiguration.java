@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Configuration;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Класс, предназначен для регистрации необходимых бинов,
- * для <a href="http://localhost:9090/graph">Prometheus</a> и <a href="http://localhost:3000/">Grafana</a>
+ * The class is designed to register the necessary beans,
+ * for <a href="http://localhost:9090/graph">Prometheus</a> и <a href="http://localhost:3000/">Grafana</a>
  */
 @Configuration
 public class HistoryTimedConfiguration {

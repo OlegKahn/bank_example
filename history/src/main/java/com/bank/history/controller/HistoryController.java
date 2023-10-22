@@ -25,22 +25,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 
 /**
- * Основной Rest API класс, возвращает HistoryDto
- * Методы:
- * getAll - возвращает List со всеми HistoryDto
+ * Main Rest API class, returns HistoryDto
+ * Methods:
+ * getAll - returns a List with all HistoryDto
  * @see HistoryController#getAll()
  *
- * getById - получает id и возвращает ResponseEntity с телом HistoryDto
+ * getById - gets id and returns ResponseEntity with body HistoryDto
  * @see HistoryController#getById(long)
  *
- * saveNew - получает HistoryDto и сохраняет его в БД
+ * saveNew - gets HistoryDto and saves it to the database
  * @see HistoryController#saveNew(HistoryDto)
  *
- * saveOld - получает существующий HistoryDto
- * с измененными данными и сохранят
+ * saveOld - gets the existing HistoryDto
+ * with changed data and will save
  * @see HistoryController#saveOld(HistoryDto)
  *
- * delete - получает id и удаляет
+ * delete - gets id and deletes
  * @see HistoryController#delete(long)
  *
  */
@@ -56,11 +56,11 @@ public class HistoryController {
 
 
     /**
-     * Метод для получения все History,
-     * превращения в HistoryDto
-     * и сохранения в List
+     * Method to get all History,
+     * turning into HistoryDto
+     * and saving to List
      *
-     * @return возвращает List<HistoryDto>
+     * @return returns List<HistoryDto>
      */
     @Operation(summary = "This is to fetch All the Histories stored in Db")
     @ApiResponses(value = {
@@ -80,10 +80,10 @@ public class HistoryController {
 
 
     /**
-     * Метод для получения History из БД
-     * и превращение его в HistoryDto
+     * Method for getting History from the database
+     * and turning it into HistoryDto
      *
-     * @param id номер ячейки в БД
+     * @param id cell number in the database
      * @return ResponseEntity<HistoryDto>
      */
     @Operation(summary = "This is to get the details of particular  Histories in the database")
@@ -107,10 +107,10 @@ public class HistoryController {
     }
 
     /**
-     * Метод для сохранения полученного HistoryDto
-     * в БД как History
+     * Method for saving the received HistoryDto
+     * in the database as History
      *
-     * @param historyDto полученный обьект
+     * @param historyDto received object
      * @return ResponseEntity<HistoryDto>
      */
     // save new history
@@ -134,10 +134,10 @@ public class HistoryController {
     }
 
     /**
-     * Метод для изменения существующего History в БД
-     * с помощью получения HistoryDto
-     * и превращения его History и сохранения
-     * @param historyDto полученный обьект
+     * Method for changing existing History in the database
+     * by getting HistoryDto
+     * and turning it into History and preserving
+     * @param historyDto received object
      * @return ResponseEntity<HistoryDto>
      */
     // change existent history
@@ -162,10 +162,10 @@ public class HistoryController {
     }
 
     /**
-     * Метод для удаления History из БД
-     * с помощью полученного id
+     * Method for removing History from the database
+     * using the received id
      *
-     * @param id History который будет удален
+     * @param id History which will be deleted
      */
     // delete history by id
     @Operation(summary = "This is to delete the Histories in the database")

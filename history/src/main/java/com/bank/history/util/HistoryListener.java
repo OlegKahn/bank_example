@@ -3,14 +3,14 @@ package com.bank.history.util;
 import org.hibernate.envers.RevisionListener;
 
 /**
- * Класс предназначенный для описания бизнес-логики
- * дополнительных полей в HistoryRevInfo
+ * A class designed to describe business logic
+ * additional fields in HistoryRevInfo
  */
 public class HistoryListener implements RevisionListener {
     /**
-     * Метод получает объект HistoryRevInfo, выполняет некую логику
-     * в тот момент когда добавляется запись в таблицу revinfo
-     * @param o сам обьект, который преобразуем и вносим изменения
+     * The method receives a HistoryRevInfo object and performs some logic
+     * at the moment when an entry is added to the revinfo table
+     * @param o the object itself, which we transform and make changes
      */
     @Override
     public void newRevision(Object o) {

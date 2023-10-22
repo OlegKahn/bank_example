@@ -6,7 +6,7 @@ import org.springframework.data.repository.history.RevisionRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * Стандартный интерфейс репозиторий
+ * Standard repository interface
  */
 @Repository
 public interface HistoryDao extends JpaRepository<History, Long>,

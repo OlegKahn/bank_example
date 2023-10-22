@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
- * Класс служит для изменения, точнее добавления полей в таблицу revinfo
+ * The class is used to change, or rather add fields to the revinfo table
  */
 @Getter
 @Setter

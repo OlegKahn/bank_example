@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 /**
- * Класс Exception Handler - предназначенный для ловли Exception
+ * Exception Handler class - designed to catch Exceptions
  */
 @Slf4j
 @ControllerAdvice
 public class HistoryGlobalExceptionHandler {
 
     /**
-     * Метод ловит NoSuchHistoryException
-     * @param e является сам NoSuchHistoryException
+     * The method catches NoSuchHistoryException
+     * @param e is itself NoSuchHistoryException
      * @return ResponseEntity<HistoryIncorrectData>
      */
     @ExceptionHandler

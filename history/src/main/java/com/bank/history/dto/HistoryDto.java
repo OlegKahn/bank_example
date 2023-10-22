@@ -11,8 +11,8 @@ import lombok.Builder;
 import java.util.Objects;
 
 /**
- * Класс предназначен для хранения данных History,
- * выполняет функцию Dto
+ * The class is designed to store History data,
+ * performs the Dto function
  */
 @Getter
 @Setter
@@ -54,9 +54,9 @@ public class HistoryDto {
 
 
     /**
-     * Стандартный метод сравнения
-     * @param o объект, который сравнивают
-     * @return true если равны, false если нет
+     * Standard comparison method
+     * @param o object being compared
+     * @return true if equal, false if not
      */
     @Override
     public boolean equals(Object o) {
@@ -75,8 +75,8 @@ public class HistoryDto {
     }
 
     /**
-     * Стандартный метод для создания хеш-кода
-     * @return возвращает хеш-код
+     * Standard Method for Generating a Hash Code
+     * @return returns hash code
      */
     @Override
     public int hashCode() {

@@ -15,8 +15,8 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Класс который реализирует интерфейс HistoryService,
- * через HistoryDao выполняет CRUD операции
+ * A class that implements the HistoryService interface,
+ * performs CRUD operations via HistoryDao
  */
 @Service
 @AllArgsConstructor
@@ -30,7 +30,7 @@ public class HistoryServiceImpl implements HistoryService {
 
 
     /**
-     * Метод получает все History из БД
+     * The method gets all History from the database
      * @return List<History>
      */
     @Override
@@ -44,12 +44,12 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
     /**
-     * Метод получает History по id
+     * The method gets History by id
      *
-     * @exception NoSuchHistoryException выбрасывает
-     * при отсутствии History по id
+     * @exception NoSuchHistoryException throws
+     * in the absence of History by id
      *
-     * @param id ищет по нему History
+     * @param id searches for it History
      * @return History
      */
     @Override
@@ -60,8 +60,8 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
     /**
-     * Метод, который сохраняет в БД History
-     * @param history сохраняемый объект History
+     * Method that saves the History to database
+     * @param history saved History object
      * @return History
      */
     @Override
@@ -81,8 +81,8 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
     /**
-     * Метод, который обновляет в БД History
-     * @param history объект History из БД
+     * Method that updates the History database
+     * @param history History object from the database
      * @return History
      */
     @Override
@@ -101,8 +101,8 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
     /**
-     * Метод, который удаляет History по id
-     * @param id удаляет по нему History
+     * Method that deletes History by id
+     * @param id deletes History using it
      */
     @Override
     public void delete(long id) {
@@ -113,8 +113,8 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
     /**
-     * Метод, который получает все изменения определенного History по id
-     * @param id ищет по нему History изменения
+     * A method that gets all changes to a specific History by id
+     * @param id searches for History changes using it
      * @return HashMap<RevisionMetadata<Long>, History>
      */
     @Override
@@ -131,8 +131,8 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
     /**
-     * Метод, который получает последнее изменение определенного History по id
-     * @param id ищет по нему последнее History изменение
+     * Method that gets the last change of a certain History by id
+     * @param id searches for the latest History change
      * @return HashMap<RevisionMetadata<Long>, History>
      */
     @Override
@@ -146,10 +146,10 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
     /**
-     * Метод, который возвращает текст с описанием ошибки
-     * @param history аргумент в котором выявлено,
-     *                что одно или несколько полей имеют нулевое значение
-     * @return возвращает текст
+     * A method that returns text describing the error
+     * @param history the argument in which it is revealed,
+     *                that one or more fields have a null value
+     * @return returns text
      */
     private String incorrectData(History history) {
         return "TransferAuditId must be > 0, but transferAuditId = " +
@@ -167,11 +167,11 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
     /**
-     * Метод, который возвращает булевское значение,
-     * true - когда ни одно из полей не меньше нуля,
-     * false - когда хотя бы одно поле меньше нуля
-     * @param history объект в котором проверяют неравенство
-     * @return булевское значение
+     * A method that returns a boolean value
+     * true - when none of the fields is less than zero,
+     * false - when at least one field is less than zero
+     * @param history object in which inequality is checked
+     * @return boolean value
      */
     private boolean isValueGreaterThanZero(History history) {
         return history.getTransferAuditId() > 0 &&

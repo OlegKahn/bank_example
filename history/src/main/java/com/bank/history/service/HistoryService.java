@@ -6,42 +6,42 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Стандартый интерфейс сервис
+ * Standard service interface
  */
 public interface HistoryService {
 
     /**
-     * Не реализованный метод для получения всех History
+     * Unimplemented method to get all History
      */
     List<History> getAll();
 
     /**
-     * Не реализованный метод для получения History по id
+     * Unimplemented method for getting History by id
      */
     History getById(long id);
 
     /**
-     * Не реализованный метод для сохранения History
+     * Unimplemented method for saving History
      */
     History saveNew(History history);
 
     /**
-     * Не реализованный метод для обновления History
+     * Unimplemented method for updating History
      */
     History saveOld(History history);
 
     /**
-     * Не реализованный метод для удаления History по id
+     * Unimplemented method for deleting History by id
      */
     void delete(long id);
 
     /**
-     * Не реализованный метод для получения всех изменений History по id
+     * Unimplemented method for getting all History changes by id
      */
     Map<RevisionMetadata<Long>, History> getAllAuditById(long id);
 
     /**
-     * Не реализованный метод для получения последнего изменения History по id
+     * Unimplemented method for getting the last change History by id
      */
     Map<RevisionMetadata<Long>, History> getLastAuditById(long id);
 }

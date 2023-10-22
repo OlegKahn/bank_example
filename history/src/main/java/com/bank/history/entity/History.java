@@ -18,7 +18,7 @@ import javax.persistence.SequenceGenerator;
 import java.util.Objects;
 
 /**
- * Основной класс-сущность хранимый в БД
+ * The main entity class stored in the database
  */
 @Getter
 @Setter
@@ -62,9 +62,9 @@ public class History {
 
 
     /**
-     * Стандартный метод сравнения
-     * @param o объект который сравнивают
-     * @return true если равны, false если нет
+     * Standard comparison method
+     * @param o object that is being compared
+     * @return true if equal, false if not
      */
     @Override
     public boolean equals(Object o) {
@@ -83,8 +83,8 @@ public class History {
     }
 
     /**
-     * Стандартный метод для создания хеш-кода
-     * @return возвращает хеш-код
+     * Standard Method for Generating a Hash Code
+     * @return returns hash code
      */
     @Override
     public int hashCode() {

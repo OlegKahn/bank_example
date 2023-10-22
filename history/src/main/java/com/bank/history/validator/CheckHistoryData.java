@@ -10,14 +10,14 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 /**
- * Аннотация для полей, чтобы указать,
- * что поле не Null и должен быть Long
- * Методы необходимые при создании аннотации:
+ * Annotation for fields to indicate
+ * that the field is not Null and should be Long
+ * Methods required when creating an annotation:
  * @see CheckHistoryData#message()
  * @see CheckHistoryData#groups()
  * @see CheckHistoryData#payload()
  *
- * Вложенныя аннотация:
+ * Attached annotation:
  * @see CheckHistoryData.List
  */
 @Target({ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE,

@@ -7,13 +7,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Класс настройка для создания необходимого бина для Swagger
- * title - заголовок артефакта для сваггера
- * version - текущая версия артефакта
- * description - краткое описание артефакта
+ * Configuration class for creating the required bean for Swagger
+ * title - artifact header for swagger
+ * version - current version of the artifact
+ * description - brief description of the artifact
  * *
- * Абсолютный путь к Swagger: <a href="http://localhost:8088/api/history/swagger-ui/index.html">.Swagger.</a>
- * Абсолютный путь для Swagger: /api/history/v3/api-docs
+ * Absolute path to Swagger: <a href="http://localhost:8088/api/history/swagger-ui/index.html">.Swagger.</a>
+ * Absolute path for Swagger: /api/history/v3/api-docs
  */
 @OpenAPIDefinition
 @Configuration

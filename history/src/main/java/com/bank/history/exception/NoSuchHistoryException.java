@@ -1,8 +1,8 @@
 package com.bank.history.exception;
 
 /**
- * NoSuchHistoryException - является классом Exception,
- * предназначенный для таких событий как попытка найти несуществующий History
+ * NoSuchHistoryException - is an Exception class,
+ * intended for events such as trying to find a non-existent History
  */
 public class NoSuchHistoryException extends RuntimeException {
 

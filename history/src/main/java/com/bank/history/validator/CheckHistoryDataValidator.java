@@ -4,29 +4,29 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 /**
- * Класс, где происходит валидация,
- * но так как в History неизменяемая валидация,
- * метод initialize не реализован
+ * The class where validation occurs
+ * but since History has immutable validation,
+ * initialize method is not implemented
  * @see CheckHistoryDataValidator#initialize(CheckHistoryData)
  */
 public class CheckHistoryDataValidator implements ConstraintValidator<CheckHistoryData, String> {
 
     /**
-     * Метод из которого получаем значение
-     * и сравниваем в методе isValid,
-     * но так как неизменяемый валидаторб
-     * потому пуст
-     * @param constraintAnnotation тут получаем сравниваемое значение
+     * The method from which we get the value
+     * and compare in the isValid method,
+     * but since the validator is immutable
+     * that's why it's empty
+     * @param constraintAnnotation here we get the compared value
      */
     @Override
     public void initialize(CheckHistoryData constraintAnnotation) {
     }
 
     /**
-     * Метод проверяющий валидность поля
-     * @param o значение поля
-     * @param constraintValidatorContext без комментариев
-     * @return возвращает булевское значение
+     * Method that checks the validity of a field
+     * @param o field value
+     * @param constraintValidatorContext no comments
+     * @return returns a boolean value
      */
     @Override
     public boolean isValid(String o, ConstraintValidatorContext constraintValidatorContext) {

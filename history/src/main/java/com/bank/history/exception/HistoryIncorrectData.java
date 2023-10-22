@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * Класс предназначен для хранения информации Exception
+ * The class is designed to store Exception information
  */
 @Getter
 @Setter
